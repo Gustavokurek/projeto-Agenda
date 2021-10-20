@@ -1,16 +1,17 @@
 const express = require('express');
-const route= express.Router();
-const homeController=require('./src/controllers/homeController')
-const LoginController=require('./src/controllers/LoginController')
+const route = express.Router();
 
-// importando middleware
-const {middleware}=require('./src/middlewares/middleware')
+const homeController = require('./src/controllers/homeController');
+const loginController = require('./src/controllers/loginController');
 
-// rota home
-route.get('/', homeController.index)
+const { loginRequired } = require('./src/middlewares/middleware');
 
-// rota login
-route.get('/login/index', LoginController.index)
+// Rotas da home
+route.get('/', homeController.index);
+
+// Rotas de login
+route.get('/login/index', loginController.index);
+route.post('/login/register', loginController.register);
    
 
 

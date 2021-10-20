@@ -7,8 +7,10 @@ exports.middleware= (req, res, next)=>{
     
 
     exports.middlewareGlobal=(req, res, next)=>{
-        res.locals.VariavelLocal= 'passo por tudo bebe'
-        next()
+      res.locals.errors= req.flash('errors');
+      res.locals.success= req.flash('success');
+      next()
+        
     }
 
     exports.checkCsrfError = (err, req, res, next) => {
