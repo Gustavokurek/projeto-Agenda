@@ -1,6 +1,7 @@
 // modelo de um model
 const validator= require('validator')
 const mongoose=require('mongoose');
+const bcryptjs=require('bcryptjs')
 
 // definindo esquemas ou requerimentos para cada chave a ser construida no bd
 const LoginSchema = new mongoose.Schema({
@@ -21,6 +22,16 @@ class Login{
     async register(){
         this.valida();
         if(this.errors.length > 0) return; 
+        //verificando se o usuário ja existe
+        await this.userExist()
+
+        if(this.errors.length > 0) return; 
+
+
+        // hash da senha 
+        const salt= bcryptjs.genSaltSync();
+        this.body.password= bcryptjs.hashSync(this.body.password, salt);
+
         try{            
             this.user= await LoginModel.create(this.body)
         }catch(e){
@@ -48,6 +59,15 @@ class Login{
         this.body={
             email: this.body.email,
             password: this.body.password
+        }
+
+    }
+
+    async userExist(){
+        // logando bd por isso o async e procurando nela usando await
+        const UsuarioExisti= await LoginModel.findOne({email: this.body.email})
+        if(UsuarioExisti){
+            this.errors.push('Usuário já existe!! ')
         }
 
     }
