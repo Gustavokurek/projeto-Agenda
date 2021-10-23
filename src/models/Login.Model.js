@@ -18,6 +18,24 @@ class Login{
         this.user=null;
     }
 
+    async login(){
+        this.valida()
+        if(this.errors.length > 0) return; 
+        this.user= await LoginModel.findOne({email: this.body.email})
+        if(!this.user){
+            this.errors.push('Usuário ou senha inválido')
+            return
+        }
+
+        if(! bcryptjs.compareSync(this.body.password, this.user.password)) {
+            this.errors.push("Usuário ou senha inválido");
+            this.user= null;
+            return
+        }
+
+
+    }
+
     // quando precisar registrar na base de dados não esquecer de usar promisses assync await e usar try catch
     async register(){
         this.valida();
@@ -31,12 +49,9 @@ class Login{
         // hash da senha 
         const salt= bcryptjs.genSaltSync();
         this.body.password= bcryptjs.hashSync(this.body.password, salt);
-
-        try{            
+        
             this.user= await LoginModel.create(this.body)
-        }catch(e){
-            console.log(e)
-        }
+    
 
     }
 
@@ -71,6 +86,10 @@ class Login{
         }
 
     }
+    
+ 
+
+
 
 }
 

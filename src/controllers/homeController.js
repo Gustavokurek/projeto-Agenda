@@ -1,5 +1,10 @@
 exports.index=(req, res, next)=>{
-    res.render('index')
+    if(req.session.user){
+        res.render('index')
+    } else{
+        res.render('login')
+    }
+
 };
 
 
