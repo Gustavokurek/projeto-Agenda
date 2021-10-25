@@ -50,11 +50,6 @@ Contato.prototype.cleanUp= function (){
 
 }
 
-Contato.buscaPorId= async function(id){
-    if(typeof id !== 'string') return
-    const user= await ContatoModel.findById(id)
-    return user 
-}
 
 Contato.prototype.edit= async function(id){
     if(typeof id !== 'string') return
@@ -64,6 +59,23 @@ Contato.prototype.edit= async function(id){
     
 }
 
+// estáticos :
+Contato.buscaPorId= async function(id){
+    if(typeof id !== 'string') return
+    const user= await ContatoModel.findById(id)
+    return user 
+}
 
+Contato.buscaContatos= async function(){
+    const user= await ContatoModel.find()
+    .sort({criadoem: -1} )
+    return user 
+}
+
+Contato.delete= async function(id){
+    if(typeof id !== 'string') return
+    const user= await ContatoModel.findOneAndDelete({_id: id})
+    return user 
+}
 
 module.exports=Contato;

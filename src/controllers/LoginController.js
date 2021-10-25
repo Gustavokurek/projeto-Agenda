@@ -1,10 +1,10 @@
 const Login= require('../models/Login.Model')
 
 exports.index=(req, res, next)=>{
-    if(req.session.user){
-        res.redirect('/')
+    if(!req.session.user){
+        res.render('login')
     } else{ 
-    res.render('login')
+        res.redirect('/')
 }
 };
 

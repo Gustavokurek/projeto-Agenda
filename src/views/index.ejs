@@ -11,19 +11,32 @@
             <%- include('includes/messenges')  %> 
 
              <h1 class="text-center"> Agenda </h1>
-             <p class="text-center lead">Seus contatos estão abaixo <%=user.email%> </p>
+             <% if(user){ %>
+                <p class="text-center lead">Seus contatos estão abaixo <%=user.email%> </p>
+             <% } %> 
         
 
 
             <div class="responsive-table">
-                <table class="table">
+                <% if(contatos.length > 0) {%>
+                    <table class="table"> 
+                    <% contatos.forEach(contato=> { %>
                     <tr>
-                        <td>Gustavo Kurek</td>
-                        <td>(42) 9 88007212 </td>
-                        <td>gustavoKureksz@outlook.com</td>
+                        <td><%= contato.nome %></td>
+                        <td><%= contato.telefone  %>  </td>
+                        <td><%= contato.email %></td>
+                        <td><a href="contato/index/<%= contato._id %>"> editar</a></td>
+                        <td><a class='text-danger' href="contato/delete/<%= contato._id %>"> excluir</a></td>
                     </tr>
-                </table>
+                   <% }) %> 
+                </table> 
             </div>
+                   <% }else{ %> 
+                   <p class="text-center lead">Você não tem nenhum contato cadastrado</p>
+                   <% } %> 
+                   
+                
+           
 
         </div>
 
