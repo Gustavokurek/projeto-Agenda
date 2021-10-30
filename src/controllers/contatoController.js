@@ -11,7 +11,7 @@ exports.index=(req, res, next)=>{
 
 exports.register=async(req, res)=>{
     try{
-        const contato= new Contato(req.body)
+        const contato= new Contato(req.body, req.session.user)
         await contato.register();
         if(contato.errors.length > 0){
             req.flash('errors', contato.errors)
@@ -46,7 +46,7 @@ exports.editIndex= async (req, res, next)=>{
 exports.edit= async (req, res)=>{
     try{
     if(!req.params.id) return res.render('404')
-    const contato= new Contato(req.body)
+    const contato= new Contato(req.body, req.session.user)
     await contato.edit(req.params.id)
 
     if(contato.errors.length > 0){

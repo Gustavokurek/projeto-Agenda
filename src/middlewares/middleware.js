@@ -10,6 +10,13 @@ exports.middleware= (req, res, next)=>{
       res.locals.errors= req.flash('errors');
       res.locals.success= req.flash('success');
       res.locals.user= req.session.user;
+      const user= res.locals.user;
+      next()
+        
+    }
+
+    exports.usuario=(req, res, next)=>{
+      res.locals.user
       next()
         
     }

@@ -44,7 +44,7 @@ export default class{
             this.lançaErro(inputNome, 'Campo requerido')
             error= true;
         }
-
+        
         if(!error) el.submit();
     }
 

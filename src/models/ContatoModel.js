@@ -7,16 +7,18 @@ const contatoSchema = new mongoose.Schema({
     nome: {type: String, required: true},
     email: { type: String, required: false, default: ''},
     telefone: { type: String, required: false, default: ''},
+    user: {type: String, required: true},
     CriadoEm: {type: Date, default: Date.now}
 
 });
 
 const ContatoModel= mongoose.model('contato', contatoSchema)
 
-function Contato(body){
+function Contato(body, user){
     this.body=body;
     this.errors=[]
     this.contato=null;
+    this.user=user
     
 } 
 
@@ -45,7 +47,8 @@ Contato.prototype.cleanUp= function (){
     this.body={
         nome: this.body.nome,
         email: this.body.email,
-        telefone: this.body.telefone
+        telefone: this.body.telefone,
+        user: this.user.email
     }
 
 }
