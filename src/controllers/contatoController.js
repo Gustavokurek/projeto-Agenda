@@ -2,7 +2,7 @@ const Contato= require('../models/ContatoModel')
 
 exports.index=(req, res, next)=>{
  
-    res.render('CadastrarContato', {
+    res.render('cadastro', {
         contato:{}
     })
 };
