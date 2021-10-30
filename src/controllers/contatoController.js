@@ -37,7 +37,7 @@ exports.editIndex= async (req, res, next)=>{
     const contato= await Contato.buscaPorId(req.params.id)
     if(!contato) return  res.render('404')
  
-    res.render('CadastrarContato', {contato})
+    res.render('cadastro', {contato})
     }catch(e){
         console.log(e)
     }
