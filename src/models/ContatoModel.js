@@ -69,8 +69,8 @@ Contato.buscaPorId= async function(id){
     return user 
 }
 
-Contato.buscaContatos= async function(){
-    const user= await ContatoModel.find()
+Contato.buscaContatos= async function(email){
+    const user= await ContatoModel.find({user: email})
     .sort({criadoem: -1} )
     return user 
 }

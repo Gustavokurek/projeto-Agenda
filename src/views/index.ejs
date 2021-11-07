@@ -19,18 +19,12 @@
 
             <div class="responsive-table">
                 
-                <% const cont= contatos.reduce((a,v)=> { %>
-                    <% if(user.email=== v.user){ %>
-                        <% a.push(v) %> 
-                    <%  } %> 
-                    <% return a %> 
-                <%}, [] )  %> 
+                 
 
-                <% if(cont.length > 0) {%>
+                <% if(contatos.length > 0) {%>
                     <table class="table"> 
                     <% contatos.forEach(contato=> { %>
                     <tr>
-                        <% if(user.email=== contato.user){ %> 
                         <td>
                             <%= contato.nome %>
                         </td>
@@ -51,9 +45,10 @@
                                 <a class='text-danger' href="contato/delete/<%= contato._id %>"> excluir</a>
                         </td>
 
-                        <% } %> 
+                        <% }) %> 
                     </tr>
-                   <% }) %> 
+                   
+
                 </table> 
             </div>
                    <% } else{ %> 

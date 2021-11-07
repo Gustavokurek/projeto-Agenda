@@ -81,6 +81,11 @@ var _default = /*#__PURE__*/function () {
         error = true;
       }
 
+      if (inputTelefone.value && inputEmail.value.length !== 0 && !validator__WEBPACK_IMPORTED_MODULE_0___default().isEmail(inputEmail.value)) {
+        this.lançaErro(inputEmail, 'Email inválido');
+        error = true;
+      }
+
       if (inputTelefone.value.length !== 0 && inputTelefone.value.length < 8) {
         this.lançaErro(inputTelefone, 'Adicione um telefone válido');
         error = true;

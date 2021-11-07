@@ -34,6 +34,10 @@ export default class{
             this.lançaErro(inputTelefone, 'Adicione um telefone válido')
             error= true;
         }
+        if(inputTelefone.value && inputEmail.value.length !== 0 && !validator.isEmail(inputEmail.value) ){
+            this.lançaErro(inputEmail, 'Email inválido')
+            error= true;
+        }
 
         if(inputTelefone.value.length !== 0  && inputTelefone.value.length < 8) {
             this.lançaErro(inputTelefone, 'Adicione um telefone válido')
